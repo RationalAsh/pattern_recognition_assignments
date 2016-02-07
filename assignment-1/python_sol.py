@@ -119,13 +119,6 @@ print("kernel shape: "+str(kernel_matrix.shape))
 Z1_preds = np.reshape(np.dot(kernel_matrix, a1), (50,50))
 Z2_preds = np.reshape(np.dot(kernel_matrix, a2), (50,50))
 
-#print(Z1_preds.shape, Z2_preds.shape)
-#print(Xv.shape, Yv.shape)
-
-# for i in xrange(50):
-#     for j in xrange(50):
-#         Z1_preds[i,49-j] = np.dot(kx_x(np.array([Xv[i], Xv[j]])), a1)
-
 #Plot the predictions for kernel regression
 fig4 = plt.figure()
 ax5 = fig4.gca(projection='3d')
@@ -146,5 +139,9 @@ ax6.set_title('Kernel Regression Using Gaussian Kernel')
 ax6.set_xlabel('X1')
 ax6.set_ylabel('Y1')
 ax6.set_zlabel('Z2 prediction')
+
+
+#Sigmoid kernel
+
 
 plt.show()

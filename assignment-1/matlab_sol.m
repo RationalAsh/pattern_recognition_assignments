@@ -12,8 +12,8 @@ t1 = train_data(:, 3);
 t2 = train_data(:, 4);
 
 %Linear regression with regularization
-lambda = 1000; %Regularization parameter
-PHI = [X X(:,2).^2 X(:,3).^2 X(:,2).^3 X(:,3).^3]; %The PHI Matrix
+lambda = 10; %Regularization parameter
+PHI = [X(:,1) sin(2*pi*X(:,2)) cos(2*pi*X(:,2)) sin(5*pi*X(:,3)) cos(5*pi*X(:,3))]; %The PHI Matrix
 
-W1 = inv(PHI'*PHI + lambda*identity(length()))*PHI'*t1;
-W2 = inv(PHI'*PHI + lambda)*PHI'*t2;
+W1 = inv(PHI'*PHI + lambda*identity(size(X,2))*PHI'*t1;
+W2 = inv(PHI'*PHI + lambda*identity(size(X,2))*PHI'*t2;

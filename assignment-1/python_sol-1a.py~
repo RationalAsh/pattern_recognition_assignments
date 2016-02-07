@@ -1,0 +1,14 @@
+#Assignment 1 (a): Plotting the kernel function
+#Gaussian kernel
+s = 0.01
+Xv = np.linspace(0,1,50)
+Yv = np.linspace(0,1,50)
+Xv, Yv = np.meshgrid(Xv,Yv)
+#Unroll the grid of coordinates
+coords = np.vstack((Xv.flatten(), Yv.flatten())).T
+print("coords shape: "+str(coords.shape))
+#Calculate the kernel matrix by calculating pairwise distances
+gaussian_kernel = scipy.exp(-(pdist(coords, 'euclidean'))**2/s**2)
+
+plt.figure()
+plt.imshow(gaussian_kernel, interpolation='nearest', cmap=plt.cm.coolwarm)
