@@ -89,7 +89,7 @@ train_acc = np.zeros(EPOCHS)
 test_acc = np.zeros(EPOCHS)
 
 for i in range(EPOCHS):
-    clf.SGD(Xtr, Ttr, batch_size=50, epochs=1, eta=0.003)
+    clf.SGD(Xtr, Ttr, batch_size=50, epochs=1, eta=0.002)
     teacc = clf.evalData(Xte, Tte)
     tracc = clf.evalData(Xtr, Ttr)
     cost = clf.costf(Xte, Tte)
@@ -97,21 +97,23 @@ for i in range(EPOCHS):
     costs[i] = cost
     train_acc[i] = tracc
     test_acc[i] = teacc
+
+    print("Cost: %.3f Train Acc: %.3f Test Acc: %.3f"%(cost, tracc, teacc))
     
-    if teacc >= 0.9:
+    if teacc >= 0.95:
         break
 
 #Plot everything
-plt.plot(costs)
+plt.plot(costs[:i])
 plt.title('Cost over time')
 plt.xlabel('Epochs')
 plt.ylabel('Cost')
 
 plt.figure()
-plt.plot(train_acc, label='Training Set Classification Accuracy')
+plt.plot(train_acc[:i], label='Training Set Classification Accuracy')
 plt.hold(True)
-plt.plot(test_acc, label='Test Set Classification Accuracy')
-plt.legend()
+plt.plot(test_acc[:i], label='Test Set Classification Accuracy')
+plt.legend(loc='lower right')
 plt.xlabel('Epochs')
 plt.ylabel('Percentage Correctly Classified')
 
@@ -125,10 +127,12 @@ Y = YL[inds]
 T = TL[inds]
 
 plt.figure()
-pred = plt.scatter(np.arange(len(Y)), Y, marker='x')
+pred = plt.scatter(np.arange(len(Y)), Y, marker='o', s=50)
 plt.hold(True)
-actual = plt.scatter(np.arange(len(T)), T, marker='o', facecolors='none')
-plt.title('Visualization of classifier Accuracy')
+actual = plt.scatter(np.arange(len(T)), T, marker='o', facecolors='none', s=50)
+plt.axis([-0.1,len(Y),-0.1,CLASSES])
+plt.suptitle('Visualization of classifier Accuracy', fontweight='bold', fontsize=14)
+plt.title('Test set Accuracy: %f'%(teacc))
 plt.xlabel('Sample')
 plt.ylabel('Class Index')
 plt.legend((pred, actual), ('Predicted Class', 'Actual Class'), loc='upper left')
